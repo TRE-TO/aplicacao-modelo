@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-export default class Cadastro extends Component {
+export default class ListaFuncionario extends Component {
 
     constructor(props) {
         super(props);
@@ -25,6 +25,9 @@ export default class Cadastro extends Component {
     render() {
         return (
             <div>
+
+                <h2>Funcionarios</h2>
+
                 <p className="">
                     Nome do Funcionário: <input type="text" value={this.state.nome} onChange={this.trataAlteracao} />
                     <button onClick={this.trataEnvio.bind(this)}>Salvar</button>

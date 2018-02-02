@@ -4,7 +4,7 @@ import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
-import Cadastro from './componentes/Cadastro';
+import ListaFuncionario from './componentes/funcionario/ListaFuncionario';
 import Inicial from './componentes/Inicial';
 
 ReactDOM.render(
@@ -12,7 +12,7 @@ ReactDOM.render(
         <App>
             <Switch>
                 <Route exact path="/" component={Inicial} />
-                <Route path="/cadastro" component={Cadastro} />
+                <Route path="/funcionario/lista" component={ListaFuncionario} />
             </Switch>
         </App>
     </Router>,

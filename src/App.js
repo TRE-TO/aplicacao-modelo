@@ -6,8 +6,9 @@ class App extends Component {
 
   render() {
     return (
+
       <div className="fl w-100 ph3">
-        
+
         <Cabecalho/>
 
         {this.props.children}

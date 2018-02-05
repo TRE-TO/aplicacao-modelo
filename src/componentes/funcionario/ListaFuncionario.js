@@ -33,7 +33,7 @@ export default class ListaFuncionario extends Component {
 
     render() {
         return (
-            <div className="mw6 mw7-ns center pt4">
+            <div>
 
                 <h2>Funcionários</h2>
 

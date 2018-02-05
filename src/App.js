@@ -11,7 +11,11 @@ class App extends Component {
 
         <Cabecalho/>
 
-        {this.props.children}
+        <div className="mw6 mw7-ns center pt4">
+
+          {this.props.children}
+
+        </div>
 
       </div>
     );

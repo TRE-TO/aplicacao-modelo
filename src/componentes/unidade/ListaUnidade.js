@@ -39,10 +39,10 @@ class UnidadesCadastradas extends Component {
             <div className="pa4">
                 <div className="overflow-auto">
                     <h2>Cadastradas</h2>
-                    <table className="f6 w-100 mw8 center" cellspacing="0">
-                        <tbody class="lh-copy">
+                    <table className="f6 w-100 mw8 center" cellSpacing="0">
+                        <tbody className="lh-copy">
                             {this.props.unidades.map(f => 
-                                <tr>
+                                <tr key={f.id}>
                                     <td className="pv3 pr3 bb b--black-20">{f.nome}</td>
                                     <td className="pv3 pr3 bb b--black-20">{f.sigla}</td>
                                 </tr>

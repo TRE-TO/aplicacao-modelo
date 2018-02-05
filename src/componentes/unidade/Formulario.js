@@ -30,12 +30,12 @@ export class Formulario extends Component {
             <form className="bg-black-05 pa3" onSubmit={this.trataEnvio.bind(this)}>
                 <h3>Cadastro</h3>
                 <div className="measure">
-                    <label htmlFor="nome" class="f6 b db mb2">Nome:</label>
-                    <input id="nome" class="input-reset ba b--black-20 pa2 mb2 db w-100" type="text" value={this.state.nome} onChange={this.trataAlteracao.bind(this, 'nome')} />
+                    <label htmlFor="nome" className="f6 b db mb2">Nome:</label>
+                    <input id="nome" className="input-reset ba b--black-20 pa2 mb2 db w-100" type="text" value={this.state.nome} onChange={this.trataAlteracao.bind(this, 'nome')} />
                 </div>
                 <div className="measure">
-                    <label htmlFor="sigla" class="f6 b db mb2">Sigla:</label>
-                    <input id="sigla" class="input-reset ba b--black-20 pa2 mb2 db w-100" type="text" value={this.state.sigla} onChange={this.trataAlteracao.bind(this, 'sigla')} />
+                    <label htmlFor="sigla" className="f6 b db mb2">Sigla:</label>
+                    <input id="sigla" className="input-reset ba b--black-20 pa2 mb2 db w-100" type="text" value={this.state.sigla} onChange={this.trataAlteracao.bind(this, 'sigla')} />
                 </div>
                 <button type="submit">Salvar</button>
             </form>

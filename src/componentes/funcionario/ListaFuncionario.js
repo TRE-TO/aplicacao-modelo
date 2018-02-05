@@ -63,11 +63,20 @@ export default class ListaFuncionario extends Component {
 class FuncionariosCadastrados extends Component {
     render() {
         return (
-            <div className="pa3 pa5-ns">
-                <h2>Cadastrados</h2>
-                <ul className="list p10 measure center">
-                    {this.props.funcionarios.map(f => <li className="lh-copy pv3 ba bl-0 bt-0 br-0 b--black-30">{f.nome}</li>)}
-                </ul>
+            <div className="pa4">
+                <div className="overflow-auto">
+                    <h2>Cadastrados</h2>
+                    <table className="f6 w-100 mw8 center" cellspacing="0">
+                        <tbody class="lh-copy">
+                            {this.props.funcionarios.map(f => 
+                                <tr>
+                                    <td className="pv3 pr3 bb b--black-20">{f.nome}</td>
+                                    <td className="pv3 pr3 bb b--black-20">{f.email}</td>
+                                </tr>
+                            )}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         );
     }

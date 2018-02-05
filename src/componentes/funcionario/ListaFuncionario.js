@@ -33,17 +33,19 @@ export default class ListaFuncionario extends Component {
 
     render() {
         return (
-            <div>
+            <div className="mw6 mw7-ns center pt4">
 
-                <h2>Funcionarios</h2>
+                <h2>Funcionários</h2>
 
-                <form className="bg-washed-yellow pv2" onSubmit={this.trataEnvio.bind(this)}>
+                <form className="bg-black-05 pa3" onSubmit={this.trataEnvio.bind(this)}>
                     <h3>Cadastro</h3>
-                    <div>
-                        Nome: <input type="text" value={this.state.nome} onChange={this.trataAlteracao.bind(this, 'nome')} />
+                    <div className="measure">
+                        <label htmlFor="nome" class="f6 b db mb2">Nome:</label>
+                        <input id="nome" class="input-reset ba b--black-20 pa2 mb2 db w-100" type="text" value={this.state.nome} onChange={this.trataAlteracao.bind(this, 'nome')} />
                     </div>
-                    <div>
-                        Email: <input type="text" value={this.state.email} onChange={this.trataAlteracao.bind(this, 'email')} />
+                    <div className="measure">
+                        <label htmlFor="email" class="f6 b db mb2">Email:</label>
+                        <input id="email" class="input-reset ba b--black-20 pa2 mb2 db w-100" type="text" value={this.state.email} onChange={this.trataAlteracao.bind(this, 'email')} />
                     </div>
                     <button type="submit">Salvar</button>
                 </form>
@@ -61,11 +63,11 @@ export default class ListaFuncionario extends Component {
 class FuncionariosCadastrados extends Component {
     render() {
         return (
-            <div>
+            <div className="pa3 pa5-ns">
                 <h2>Cadastrados</h2>
-                <ol>
-                    {this.props.funcionarios.map(f => <li>{f.nome}</li>)}
-                </ol>
+                <ul className="list p10 measure center">
+                    {this.props.funcionarios.map(f => <li className="lh-copy pv3 ba bl-0 bt-0 br-0 b--black-30">{f.nome}</li>)}
+                </ul>
             </div>
         );
     }

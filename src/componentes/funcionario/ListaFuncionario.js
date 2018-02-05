@@ -24,11 +24,11 @@ export default class ListaFuncionario extends Component {
     trataEnvio(e) {
         e.preventDefault();
 
-        this.setState(estadoAnterior => { 
+        this.setState(estadoAnterior => ({ 
             funcionarios: estadoAnterior.funcionarios.concat(
                 {nome: estadoAnterior.nome, email: estadoAnterior.email}
             )
-        });
+        }));
     }
 
     render() {
@@ -50,12 +50,22 @@ export default class ListaFuncionario extends Component {
 
                 {this.state.funcionarios.length === 0 ||
                 <div>
-                    <h2>Cadastrados</h2>
-                    <ol>
-                        {this.state.funcionarios.map(f => <li>{f.nome}</li>)}
-                    </ol>
+                    <FuncionariosCadastrados funcionarios={this.state.funcionarios} />
                 </div>
                 }
+            </div>
+        );
+    }
+}
+
+class FuncionariosCadastrados extends Component {
+    render() {
+        return (
+            <div>
+                <h2>Cadastrados</h2>
+                <ol>
+                    {this.props.funcionarios.map(f => <li>{f.nome}</li>)}
+                </ol>
             </div>
         );
     }

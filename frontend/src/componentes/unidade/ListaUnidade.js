@@ -7,12 +7,18 @@ export default class ListaUnidade extends Component {
         super(props);
         this.state = {
           unidades: [
-              {id: 1, nome: 'Coordenadoria de Desenvolvimento de Sistemas', sigla: 'CDS'},
-              {id: 2, nome: 'Seção de Desenvolvimento de Sistemas Administrativos', sigla: 'SEDSA'},
-              {id: 3, nome: 'Seção de Sistemas e Administração Web', sigla: 'SESAW'},
-              {id: 4, nome: 'Secretaria de Tecnologia da Informação', sigla: 'STI'}
+            //   {id: 1, nome: 'Coordenadoria de Desenvolvimento de Sistemas', sigla: 'CDS'},
+            //   {id: 2, nome: 'Seção de Desenvolvimento de Sistemas Administrativos', sigla: 'SEDSA'},
+            //   {id: 3, nome: 'Seção de Sistemas e Administração Web', sigla: 'SESAW'},
+            //   {id: 4, nome: 'Secretaria de Tecnologia da Informação', sigla: 'STI'}
           ]
         }
+    }
+
+    componentDidMount() {
+        fetch('/unidades')
+            .then(response => response.json())
+            .then(json => this.setState({unidades: json}))
     }
 
     render() {

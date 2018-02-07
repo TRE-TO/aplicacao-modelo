@@ -14,8 +14,13 @@ import br.jus.treto.aplicacaomodelo.repository.UnidadeRepository;
 @RequestMapping("/unidades")
 public class UnidadeController {
 
+	private final UnidadeRepository unidadeRepository;
+	
 	@Autowired
-	private UnidadeRepository unidadeRepository;
+	public UnidadeController(UnidadeRepository ur) {
+		super();
+		this.unidadeRepository = ur;
+	}
 	
 	@GetMapping
 	Iterable<Unidade> listarTodas() {

@@ -1,6 +1,9 @@
 package br.jus.treto.aplicacaomodelo.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,7 +42,7 @@ public class UnidadeController {
 
 	@PutMapping
 	@ResponseStatus(HttpStatus.OK)
-	void alterar(@RequestBody Unidade unidade) {
+	void alterar(@RequestBody @Valid Unidade unidade) {
 		unidadeRepository.save(unidade);
 	}
 	
@@ -51,5 +54,10 @@ public class UnidadeController {
 	@GetMapping("/{id}")
 	Unidade get(@PathVariable Long id) {
 		return unidadeRepository.findOne(id);
+	}
+	
+	@GetMapping("/ordenado/{campo}")
+	Iterable<Unidade> listarOrdenado(@PathVariable String campo) {
+		return unidadeRepository.findAll(new Sort(campo));
 	}
 }

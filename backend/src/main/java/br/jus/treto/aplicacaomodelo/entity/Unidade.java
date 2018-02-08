@@ -3,6 +3,7 @@ package br.jus.treto.aplicacaomodelo.entity;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,8 +19,11 @@ public class Unidade {
 	@GeneratedValue
 	private Long id;
 	
+	@NotNull
+//	@Column(nullable=false)
 	private String nome;
 	
+	@NotNull
 	private String sigla;
 
 }

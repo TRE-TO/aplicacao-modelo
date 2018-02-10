@@ -3,6 +3,7 @@ package br.jus.treto.aplicacaomodelo.controller;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -62,8 +63,18 @@ public class FuncionarioController {
 		return funcionarioRepository.findAll(new Sort(campo));
 	}
 	
+	@GetMapping("/paginado/{page}/{size}")
+	Iterable<Funcionario> listarPaginado(@PathVariable Integer page, @PathVariable Integer size) {
+		return funcionarioRepository.findAll(new PageRequest(page, size, new Sort("nome")));
+	}
+	
 	@GetMapping("/porUnidade/{unidade}")
 	Iterable<Funcionario> listarPorUnidade(@PathVariable Unidade unidade) {
 		return funcionarioRepository.findByLotacao(unidade);
+	}
+
+	@GetMapping("/porSiglaUnidade/{siglaUnidade}")
+	Iterable<Funcionario> listarPorNomeUnidade(@PathVariable String siglaUnidade) {
+		return funcionarioRepository.findByLotacaoSigla(siglaUnidade);
 	}
 }

@@ -25,19 +25,25 @@ public class ModeloApplication {
 		Unidade sedsa = new Unidade(null, "Seção de Sistemas Administrativos", "SEDSA");
 		Unidade cds = new Unidade(null, "Coordenação de Sistemas", "CDS");
 		
-		Funcionario felipe = new Funcionario(null, "Felipe", "felipe.oliveira@tre-to.jus.br", sesaw);
-		Funcionario jhonathan = new Funcionario(null, "Jhonathan", "jhonathan@tre-to.jus.br", sedsa);
-		Funcionario robson = new Funcionario(null, "Robson", "robson.aristoteles@tre-to.jus.br", cds);
-		
 		Stream<Unidade> unidades = Stream.of(
 				sesaw,
 				sedsa,
 				cds);
 		
 		Stream<Funcionario> funcionarios = Stream.of(
-				felipe,
-				jhonathan,
-				robson);
+				new Funcionario(null, "Michael", "michael@tre-to.jus.br", sesaw),
+				new Funcionario(null, "Alexandre", "alexandre.oliveira@tre-to.jus.br", sesaw),
+				new Funcionario(null, "Felipe", "felipe.oliveira@tre-to.jus.br", sesaw),
+				new Funcionario(null, "Mariana", "mariana.soares@tre-to.jus.br", sesaw),
+				new Funcionario(null, "Franck", "franck.costa@tre-to.jus.br", sesaw),
+				new Funcionario(null, "Kayque", "kayque@tre-to.jus.br", sesaw),
+				new Funcionario(null, "Josué", "jpires@tre-to.jus.br", sedsa),
+				new Funcionario(null, "Francisco", "fmourafe@tre-to.jus.br", sedsa),
+				new Funcionario(null, "Vilnei", "vilnei@tre-to.jus.br", sedsa),
+				new Funcionario(null, "Jhonathan", "jhonathan@tre-to.jus.br", sedsa),
+				new Funcionario(null, "Robson", "robson@tre-to.jus.br", sedsa),
+				new Funcionario(null, "Alysson", "abruno@tre-to.jus.br", cds),
+				new Funcionario(null, "Robson Aristóteles", "robson.aristoteles@tre-to.jus.br", cds));
 		
 		return args -> {
 				unidades.forEach(unidade -> unidadeRepo.save(unidade));

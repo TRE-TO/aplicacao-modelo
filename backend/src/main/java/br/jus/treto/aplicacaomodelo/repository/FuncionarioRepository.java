@@ -10,4 +10,6 @@ import br.jus.treto.aplicacaomodelo.entity.Unidade;
 public interface FuncionarioRepository extends PagingAndSortingRepository<Funcionario, Long> {
 	
 	List<Funcionario> findByLotacao(Unidade unidade);
+
+	Iterable<Funcionario> findByLotacaoSigla(String nomeUnidade);
 }

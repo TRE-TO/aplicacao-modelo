@@ -60,4 +60,9 @@ public class UnidadeController {
 	Iterable<Unidade> listarOrdenado(@PathVariable String campo) {
 		return unidadeRepository.findAll(new Sort(campo));
 	}
+	
+	@GetMapping("/porSigla/{sigla}")
+	Iterable<Unidade> listarFiltrado(@PathVariable String sigla) {
+		return unidadeRepository.findBySigla(sigla);
+	}
 }

@@ -1,12 +1,10 @@
 package br.jus.treto.aplicacaomodelo.entity;
 
-import java.util.List;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
 import lombok.AllArgsConstructor;
@@ -14,31 +12,23 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name="UNIDADES_TSE")
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Data
-public class Unidade {
+public class Funcionario {
 	
 	@Id
 	@GeneratedValue
 	private Long id;
 	
 	@NotNull
-//	@Column(nullable=false)
 	private String nome;
 	
 	@NotNull
-	private String sigla;
+	private String email;
 	
-	@OneToMany
-	private List<Funcionario> funcionarios;
+	@ManyToOne
+	@JoinColumn(name="id_unidade")
+	private Unidade lotacao;
 
-	public Unidade(Long id, String nome, String sigla) {
-		super();
-		this.id = id;
-		this.nome = nome;
-		this.sigla = sigla;
-	}
-	
 }

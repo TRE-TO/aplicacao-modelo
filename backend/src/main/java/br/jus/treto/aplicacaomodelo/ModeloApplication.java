@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Bean;
 
 import br.jus.treto.aplicacaomodelo.entity.Funcionario;
 import br.jus.treto.aplicacaomodelo.entity.Unidade;
+import br.jus.treto.aplicacaomodelo.repository.FuncionarioRepository;
 import br.jus.treto.aplicacaomodelo.repository.UnidadeRepository;
 
 @SpringBootApplication
@@ -19,7 +20,7 @@ public class ModeloApplication {
 	}
 	
 	@Bean
-	ApplicationRunner run(UnidadeRepository repo) {
+	ApplicationRunner run(UnidadeRepository unidadeRepo, FuncionarioRepository funcionarioRepo) {
 		Unidade sesaw = new Unidade(null, "Seção de Sistemas Web", "SESAW");
 		Unidade sedsa = new Unidade(null, "Seção de Sistemas Administrativos", "SEDSA");
 		Unidade cds = new Unidade(null, "Coordenação de Sistemas", "CDS");
@@ -37,12 +38,10 @@ public class ModeloApplication {
 				felipe,
 				jhonathan,
 				robson);
-
-		return args -> {
-				unidades
-					.forEach(unidade -> repo.save(unidade));
 		
-				funcionarios.forEach(f -> repo.save(f));
+		return args -> {
+				unidades.forEach(unidade -> unidadeRepo.save(unidade));
+				funcionarios.forEach(funcionarioRepo::save);
 		};
 	}
 }

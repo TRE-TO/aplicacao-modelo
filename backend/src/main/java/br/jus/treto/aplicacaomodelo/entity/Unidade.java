@@ -31,7 +31,7 @@ public class Unidade {
 	@NotNull
 	private String sigla;
 	
-	@OneToMany
+	@OneToMany(mappedBy="lotacao")
 	private List<Funcionario> funcionarios;
 
 	public Unidade(Long id, String nome, String sigla) {

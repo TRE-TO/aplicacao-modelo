@@ -19,12 +19,16 @@ import org.springframework.web.bind.annotation.RestController;
 import br.jus.treto.aplicacaomodelo.entity.Funcionario;
 import br.jus.treto.aplicacaomodelo.entity.Unidade;
 import br.jus.treto.aplicacaomodelo.repository.FuncionarioRepository;
+import br.jus.treto.aplicacaomodelo.service.FuncionarioService;
 
 @RestController
 @RequestMapping("/funcionarios")
 public class FuncionarioController {
 
 	private final FuncionarioRepository funcionarioRepository;
+
+	@Autowired
+	private FuncionarioService funcionarioService;
 	
 	@Autowired
 	public FuncionarioController(FuncionarioRepository ur) {
@@ -86,5 +90,10 @@ public class FuncionarioController {
 	@GetMapping("/porTrechoNomeHQL/{trechoNome}")
 	Iterable<Funcionario> listarPorTrechoNomeHQL(@PathVariable String trechoNome) {
 		return funcionarioRepository.buscarPorNomeContendo(trechoNome);
+	}
+	
+	@GetMapping("/negocio")
+	String getMetodoDeNegocio() {
+		return funcionarioService.metodoDeNegocio();
 	}
 }

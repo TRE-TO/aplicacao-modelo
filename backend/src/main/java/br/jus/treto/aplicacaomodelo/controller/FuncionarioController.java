@@ -80,6 +80,11 @@ public class FuncionarioController {
 	
 	@GetMapping("/porTrechoNome/{trechoNome}")
 	Iterable<Funcionario> listarPorTrechoNome(@PathVariable String trechoNome) {
-		return funcionarioRepository.findByNome(trechoNome);
+		return funcionarioRepository.findByNomeContaining(trechoNome);
+	}
+
+	@GetMapping("/porTrechoNomeHQL/{trechoNome}")
+	Iterable<Funcionario> listarPorTrechoNomeHQL(@PathVariable String trechoNome) {
+		return funcionarioRepository.buscarPorNomeContendo(trechoNome);
 	}
 }

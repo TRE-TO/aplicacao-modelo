@@ -7,6 +7,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -27,6 +29,7 @@ public class Funcionario {
 	@NotNull
 	private String email;
 	
+	@JsonIgnoreProperties("funcionarios")
 	@ManyToOne
 	@JoinColumn(name="id_unidade")
 	private Unidade lotacao;

@@ -77,4 +77,9 @@ public class FuncionarioController {
 	Iterable<Funcionario> listarPorNomeUnidade(@PathVariable String siglaUnidade) {
 		return funcionarioRepository.findByLotacaoSigla(siglaUnidade);
 	}
+	
+	@GetMapping("/porTrechoNome/{trechoNome}")
+	Iterable<Funcionario> listarPorTrechoNome(@PathVariable String trechoNome) {
+		return funcionarioRepository.findByNome(trechoNome);
+	}
 }

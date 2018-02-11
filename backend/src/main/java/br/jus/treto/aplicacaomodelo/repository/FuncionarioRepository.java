@@ -12,4 +12,7 @@ public interface FuncionarioRepository extends PagingAndSortingRepository<Funcio
 	List<Funcionario> findByLotacao(Unidade unidade);
 
 	Iterable<Funcionario> findByLotacaoSigla(String nomeUnidade);
+
+	List<Funcionario> findByNome(String trechoNome);
+	
 }

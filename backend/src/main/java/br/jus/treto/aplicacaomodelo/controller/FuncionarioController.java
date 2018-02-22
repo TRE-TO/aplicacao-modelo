@@ -36,6 +36,11 @@ public class FuncionarioController {
 		this.funcionarioRepository = ur;
 	}
 	
+	@GetMapping("/ola")
+	String ola() {
+		return "Olá, pessoas...";
+	}
+	
 	@GetMapping
 	Iterable<Funcionario> listarTodas() {
 		return funcionarioRepository.findAll();

@@ -11,6 +11,9 @@ export class Cabecalho extends Component {
                     <Link className="link dim gray f6 f5-ns dib mr3" to="/" title="Inicial">Inicial</Link>
                     <Link className="link dim gray f6 f5-ns dib mr3" to="/funcionario/lista" title="Funcionários">Funcionários</Link>
                     <Link className="link dim gray f6 f5-ns dib mr3" to="/unidade/lista" title="Unidades">Unidades</Link>
+                    {sessionStorage.getItem('usuario') !== null 
+                        ? <Link className="link dim gray f6 f5-ns dib mr3" to="/logout" title="Logout">Logout</Link>
+                        : <Link className="link dim gray f6 f5-ns dib mr3" to="/login" title="Login">Login</Link>}
                 </nav>
             </header>
         );

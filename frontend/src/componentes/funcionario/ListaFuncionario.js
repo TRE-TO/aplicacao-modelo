@@ -40,12 +40,12 @@ export default class ListaFuncionario extends Component {
                 <form className="bg-black-05 pa3" onSubmit={this.trataEnvio.bind(this)}>
                     <h3>Cadastro</h3>
                     <div className="measure">
-                        <label htmlFor="nome" class="f6 b db mb2">Nome:</label>
-                        <input id="nome" class="input-reset ba b--black-20 pa2 mb2 db w-100" type="text" value={this.state.nome} onChange={this.trataAlteracao.bind(this, 'nome')} />
+                        <label htmlFor="nome" className="f6 b db mb2">Nome:</label>
+                        <input id="nome" className="input-reset ba b--black-20 pa2 mb2 db w-100" type="text" value={this.state.nome} onChange={this.trataAlteracao.bind(this, 'nome')} />
                     </div>
                     <div className="measure">
-                        <label htmlFor="email" class="f6 b db mb2">Email:</label>
-                        <input id="email" class="input-reset ba b--black-20 pa2 mb2 db w-100" type="text" value={this.state.email} onChange={this.trataAlteracao.bind(this, 'email')} />
+                        <label htmlFor="email" className="f6 b db mb2">Email:</label>
+                        <input id="email" className="input-reset ba b--black-20 pa2 mb2 db w-100" type="text" value={this.state.email} onChange={this.trataAlteracao.bind(this, 'email')} />
                     </div>
                     <button type="submit">Salvar</button>
                 </form>
@@ -67,7 +67,7 @@ class FuncionariosCadastrados extends Component {
                 <div className="overflow-auto">
                     <h2>Cadastrados</h2>
                     <table className="f6 w-100 mw8 center" cellspacing="0">
-                        <tbody class="lh-copy">
+                        <tbody className="lh-copy">
                             {this.props.funcionarios.map(f => 
                                 <tr>
                                     <td className="pv3 pr3 bb b--black-20">{f.nome}</td>

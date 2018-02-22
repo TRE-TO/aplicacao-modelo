@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
+import cookie from 'react-cookie';
 
 export default class ListaFuncionario extends Component {
 
@@ -7,14 +9,23 @@ export default class ListaFuncionario extends Component {
         this.state = {
           nome: '',
           email: '',
-          funcionarios: [
-              {id: 1, nome: 'José da Silva Santos', email: 'jose@tre-to.jus.br'},
-              {id: 2, nome: 'Maria de Jesus Pereira', email: 'maria@tre-to.jus.br'},
-              {id: 3, nome: 'Joaquim Teixeira Souza', email: 'joaquim@tre-to.jus.br'},
-              {id: 4, nome: 'Ana Teresa Gonçalves', email: 'ana@tre-to.jus.br'},
-              {id: 5, nome: 'Pedro Silva Soares', email: 'pedro@tre-to.jus.br'}
-          ]
+          funcionarios: [],
+          fazerLogin: false
         }
+    }
+
+    componentDidMount() {
+        fetch('/funcionarios', {headers: {'X-XSRF-TOKEN': cookie.load('XSRF-TOKEN')}, credentials: 'include'})
+            .then(resp => {
+                if (resp.status === 403) {
+                    throw new Error('Sessão inválida.');
+                }
+                else {
+                    return resp.json()
+                }
+            })
+            .then(json => this.setState({funcionarios: json}))
+            .catch(erro => this.setState({fazerLogin: true}));
     }
 
     trataAlteracao(nomeInput, e) {
@@ -32,6 +43,9 @@ export default class ListaFuncionario extends Component {
     }
 
     render() {
+        if (this.state.fazerLogin) {
+            return <Redirect to="/login" />;
+        }
         return (
             <div>
 
@@ -62,18 +76,21 @@ export default class ListaFuncionario extends Component {
 
 class FuncionariosCadastrados extends Component {
     render() {
+
+        let funcionarios = this.props.funcionarios.map(f => 
+            <tr>
+                <td className="pv3 pr3 bb b--black-20">{f.nome}</td>
+                <td className="pv3 pr3 bb b--black-20">{f.email}</td>
+            </tr>
+        );
+
         return (
             <div className="pa4">
                 <div className="overflow-auto">
                     <h2>Cadastrados</h2>
                     <table className="f6 w-100 mw8 center" cellspacing="0">
                         <tbody className="lh-copy">
-                            {this.props.funcionarios.map(f => 
-                                <tr>
-                                    <td className="pv3 pr3 bb b--black-20">{f.nome}</td>
-                                    <td className="pv3 pr3 bb b--black-20">{f.email}</td>
-                                </tr>
-                            )}
+                            {funcionarios}
                         </tbody>
                     </table>
                 </div>

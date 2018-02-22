@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 import cookie from 'react-cookie';
 
 export default class Login extends Component {
@@ -8,7 +9,8 @@ export default class Login extends Component {
         this.state = {
             usuario: '',
             senha: '',
-            status: ''
+            status: '',
+            sucesso: false
         };
     }
 
@@ -43,7 +45,7 @@ export default class Login extends Component {
             .then(resp => resp.text())
             .then(resp => {
                 sessionStorage.setItem('usuario', resp);
-                this.setState({status: resp})
+                this.setState({status: resp, sucesso: true});
             })
             .catch(erro => {
                 this.setState({status: erro.message});
@@ -51,6 +53,9 @@ export default class Login extends Component {
     }
 
     render() {
+        if (this.state.sucesso) {
+            return <Redirect to="/funcionario/lista" />;
+        }
         return (
             <div>
                 <h3>Login</h3>

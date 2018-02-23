@@ -81,7 +81,7 @@ class UnidadesCadastradas extends Component {
     render() {
 
         let unidades = this.props.unidades.map(u => 
-            <tr>
+            <tr key={u.id}>
                 <td className="pv3 pr3 bb b--black-20">{u.nome}</td>
                 <td className="pv3 pr3 bb b--black-20">{u.sigla}</td>
             </tr>

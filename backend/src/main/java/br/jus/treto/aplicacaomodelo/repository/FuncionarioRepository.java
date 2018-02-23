@@ -2,6 +2,7 @@ package br.jus.treto.aplicacaomodelo.repository;
 
 import java.util.List;
 
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
@@ -14,7 +15,7 @@ public interface FuncionarioRepository extends PagingAndSortingRepository<Funcio
 
 	Iterable<Funcionario> findByLotacaoSigla(String nomeUnidade);
 
-	List<Funcionario> findByNomeContaining(String trechoNome);
+	List<Funcionario> findByNomeContaining(String trechoNome, Pageable pageable);
 	
 	@Query("select f from Funcionario f where f.nome like %?1%")
 	List<Funcionario> buscarPorNomeContendo(String trechoNome);

@@ -10,12 +10,18 @@ export default class ListaFuncionario extends Component {
           nome: '',
           email: '',
           funcionarios: [],
-          fazerLogin: false
+          fazerLogin: false,
+          pagina: 0,
+          tamanho: 10
         }
     }
 
     componentDidMount() {
-        fetch('/funcionarios', {headers: {'X-XSRF-TOKEN': cookie.load('XSRF-TOKEN')}, credentials: 'include'})
+        this.carregarInicial();
+    }
+
+    carregarInicial() {
+        fetch(`/funcionarios/paginado/${this.state.pagina}/${this.state.tamanho}`, {headers: {'X-XSRF-TOKEN': cookie.load('XSRF-TOKEN')}, credentials: 'include'})
             .then(resp => {
                 if (resp.status === 403) {
                     throw new Error('Sessão inválida.');
@@ -24,7 +30,7 @@ export default class ListaFuncionario extends Component {
                     return resp.json()
                 }
             })
-            .then(json => this.setState({funcionarios: json}))
+            .then(json => this.setState({funcionarios: json.content}))
             .catch(erro => this.setState({fazerLogin: true}));
     }
 
@@ -35,11 +41,22 @@ export default class ListaFuncionario extends Component {
     trataEnvio(e) {
         e.preventDefault();
 
-        this.setState(estadoAnterior => ({ 
-            funcionarios: estadoAnterior.funcionarios.concat(
-                {nome: estadoAnterior.nome, email: estadoAnterior.email}
-            )
-        }));
+        if (this.state.nome.length === 0) {
+            this.carregarInicial();
+        }
+        else { 
+            fetch(`/funcionarios/porTrechoNome/${this.state.nome}/${this.state.pagina}/${this.state.tamanho}`, {headers: {'X-XSRF-TOKEN': cookie.load('XSRF-TOKEN')}, credentials: 'include'})
+                .then(resp => {
+                    if (resp.status === 403) {
+                        throw new Error('Sessão inválida.');
+                    }
+                    else {
+                        return resp.json()
+                    }
+                })
+                .then(json => this.setState({funcionarios: json}))
+                .catch(erro => this.setState({fazerLogin: true}));
+        }
     }
 
     render() {
@@ -52,16 +69,14 @@ export default class ListaFuncionario extends Component {
                 <h2>Funcionários</h2>
 
                 <form className="bg-black-05 pa3" onSubmit={this.trataEnvio.bind(this)}>
-                    <h3>Cadastro</h3>
+                    <h3>Filtrar</h3>
+                    Página:<input type="text" value={this.state.pagina} onChange={this.trataAlteracao.bind(this, 'pagina')} />
+                    Tamanho:<input type="text" value={this.state.tamanho} onChange={this.trataAlteracao.bind(this, 'tamanho')} />
                     <div className="measure">
                         <label htmlFor="nome" className="f6 b db mb2">Nome:</label>
                         <input id="nome" className="input-reset ba b--black-20 pa2 mb2 db w-100" type="text" value={this.state.nome} onChange={this.trataAlteracao.bind(this, 'nome')} />
                     </div>
-                    <div className="measure">
-                        <label htmlFor="email" className="f6 b db mb2">Email:</label>
-                        <input id="email" className="input-reset ba b--black-20 pa2 mb2 db w-100" type="text" value={this.state.email} onChange={this.trataAlteracao.bind(this, 'email')} />
-                    </div>
-                    <button type="submit">Salvar</button>
+                    <button type="submit">Pesquisar</button>
                 </form>
 
                 {this.state.funcionarios.length === 0 ||
@@ -78,9 +93,10 @@ class FuncionariosCadastrados extends Component {
     render() {
 
         let funcionarios = this.props.funcionarios.map(f => 
-            <tr>
+            <tr key={f.id}>
                 <td className="pv3 pr3 bb b--black-20">{f.nome}</td>
                 <td className="pv3 pr3 bb b--black-20">{f.email}</td>
+                <td className="pv3 pr3 bb b--black-20">{f.lotacao.sigla}</td>
             </tr>
         );
 
@@ -88,7 +104,12 @@ class FuncionariosCadastrados extends Component {
             <div className="pa4">
                 <div className="overflow-auto">
                     <h2>Cadastrados</h2>
-                    <table className="f6 w-100 mw8 center" cellspacing="0">
+                    <table className="f6 w-100 mw8 center" cellSpacing="0">
+                        <thead>
+                            <th className="pv3 pr3 bb b--black-20">Nome</th>
+                            <th className="pv3 pr3 bb b--black-20">Email</th>
+                            <th className="pv3 pr3 bb b--black-20">Unidade</th>
+                        </thead>
                         <tbody className="lh-copy">
                             {funcionarios}
                         </tbody>

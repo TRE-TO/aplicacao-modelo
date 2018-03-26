@@ -1,3 +1,7 @@
+# Introdução
+
+Esta é a aplicação usada como modelo para as demais aplicações do TRE-TO. Ela usa separação de frontend e backend. No primeiro é usado ReactJS e no segundo, é usado Spring Boot. Para padronização, ambas as pastas devem estar dentro do mesmo repositório Git.
+
 # ReactJS
 
 Documentação: http://reactjs.org 
@@ -16,6 +20,10 @@ Documentação: http://reactjs.org
   * $node_modules/.bin/create-react-app frontend
   * $node_modules é a pasta node_modules que será criada quando o create-react-app for instalado.
 
+## Execução da aplicação
+* `cd frontend`
+* `npm start`
+
 ## Uso do router (templates e links entre páginas)
 * npm install --save-dev react-router-dom
 
@@ -30,6 +38,11 @@ Documentação: http://reactjs.org
   * JPA
   * Security
   * Lombok: https://projectlombok.org/
+  
+# Ambiente de desenvolvimento
+
+* Recomenda-se o uso do Spring Tool Suite, pois é possível habilitar o *hot swapping* na forma apresentada na seção 'Dicas'.
+* Para usar o Lombok, deve-se executar o arquivo lombok-<VERSAO>.jar e escolher a IDE usada.
 
 ## Controllers
 
